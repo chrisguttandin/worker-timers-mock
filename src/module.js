@@ -1,20 +1,14 @@
 'use strict';
 
 var currentIntervalTime,
-    currentTimeoutTime,
     lastIntervalId,
-    lastTimeoutId,
     scheduledIntervalFunctions,
-    scheduledTimeoutFunctions,
     sinon = require('sinon'),
     workerTimers;
 
 currentIntervalTime = 0;
-currentTimeoutTime = 0;
 lastIntervalId = -1;
-lastTimeoutId = -1;
 scheduledIntervalFunctions = [];
-scheduledTimeoutFunctions = [];
 
 workerTimers = {
     clearInterval: function () {},

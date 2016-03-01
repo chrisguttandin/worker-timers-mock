@@ -2,6 +2,7 @@
 
 module.exports = function (config) {
 
+    /* eslint-disable indent */
     var configuration = {
 
             files: [
@@ -19,6 +20,7 @@ module.exports = function (config) {
             }
 
         };
+    /* eslint-enable indent */
 
     if (process.env.TRAVIS) {
         configuration.browsers = [
