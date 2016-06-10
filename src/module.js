@@ -11,9 +11,9 @@ lastIntervalId = -1;
 scheduledIntervalFunctions = [];
 
 workerTimers = {
-    clearInterval: function () {},
-    clearTimeout: function () {},
-    flushInterval: function (elapsedTime) {
+    clearInterval () {},
+    clearTimeout () {},
+    flushInterval (elapsedTime) {
         var scheduledIntervalFunction;
 
         currentIntervalTime += elapsedTime;
@@ -28,8 +28,8 @@ workerTimers = {
             });
         }
     },
-    setInterval: function () {},
-    setTimeout: function () {}
+    setInterval () {},
+    setTimeout () {}
 };
 
 sinon.stub(workerTimers, 'clearInterval', function (id) {
@@ -57,9 +57,9 @@ sinon.stub(workerTimers, 'setInterval', function (func, delay) {
     id = lastIntervalId;
 
     scheduledIntervalFunctions.push({
-        delay: delay,
-        func: func,
-        id: id,
+        delay,
+        func,
+        id,
         nextTime: currentIntervalTime + delay
     });
 
