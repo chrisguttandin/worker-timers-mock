@@ -1,5 +1,8 @@
 {
   "author": "Christoph Guttandin",
+  "bugs": {
+    "url": "https://github.com/chrisguttandin/worker-timers-mock/issues"
+  },
   "dependencies": {
     "browserify": "^13.0.0",
     "sinon": "^1.17.3"
