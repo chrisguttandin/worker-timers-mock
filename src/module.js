@@ -1,9 +1,8 @@
-'use strict';
+import { stub } from 'sinon';
 
 var currentIntervalTime,
     lastIntervalId,
     scheduledIntervalFunctions,
-    sinon = require('sinon'),
     workerTimers;
 
 currentIntervalTime = 0;
@@ -23,19 +22,17 @@ workerTimers = {
             scheduledIntervalFunction.func();
             scheduledIntervalFunction.nextTime += scheduledIntervalFunction.delay;
 
-            scheduledIntervalFunctions.sort(function(a, b) {
-                return a.nextTime - b.nextTime;
-            });
+            scheduledIntervalFunctions.sort((a, b) => a.nextTime - b.nextTime);
         }
     },
     setInterval () {},
     setTimeout () {}
 };
 
-sinon.stub(workerTimers, 'clearInterval', function (id) {
+stub(workerTimers, 'clearInterval', (id) => {
     var found;
 
-    scheduledIntervalFunctions.some(function (scheduledIntervalFunction) {
+    scheduledIntervalFunctions.some((scheduledIntervalFunction) => {
         found = (scheduledIntervalFunction.id === id);
 
         if (found) {
@@ -46,11 +43,11 @@ sinon.stub(workerTimers, 'clearInterval', function (id) {
     });
 });
 
-sinon.stub(workerTimers, 'clearTimeout', function () {
+stub(workerTimers, 'clearTimeout', () => {
 
 });
 
-sinon.stub(workerTimers, 'setInterval', function (func, delay) {
+stub(workerTimers, 'setInterval', (func, delay) => {
     var id;
 
     lastIntervalId += 1;
@@ -63,18 +60,16 @@ sinon.stub(workerTimers, 'setInterval', function (func, delay) {
         nextTime: currentIntervalTime + delay
     });
 
-    scheduledIntervalFunctions.sort(function(a, b) {
-        return a.nextTime - b.nextTime;
-    });
+    scheduledIntervalFunctions.sort((a, b) => a.nextTime - b.nextTime);
 
     return id;
 });
 
-sinon.stub(workerTimers, 'setTimeout', function () {
+stub(workerTimers, 'setTimeout', () => {
 
 });
 
-workerTimers.resetInterval = function () {
+workerTimers.resetInterval = () => {
     currentIntervalTime = 0;
     lastIntervalId = -1;
     scheduledIntervalFunctions.length = 0;
@@ -83,4 +78,4 @@ workerTimers.resetInterval = function () {
     workerTimers.setInterval.reset();
 };
 
-module.exports = workerTimers;
+export default workerTimers;

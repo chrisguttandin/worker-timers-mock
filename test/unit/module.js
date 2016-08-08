@@ -1,19 +1,17 @@
-'use strict';
+import { spy } from 'sinon';
+import workerTimersMock from '../../src/module';
 
-var spy = require('sinon').spy,
-    workerTimersMock = require('../../src/module.js');
+describe('workerTimersMock', () => {
 
-describe('workerTimersMock', function () {
-
-    describe('flush()', function () {
+    describe('flush()', () => {
 
         var func;
 
-        beforeEach(function () {
+        beforeEach(() => {
             func = spy();
         });
 
-        it('should not call the given function', function () {
+        it('should not call the given function', () => {
             workerTimersMock.setInterval(func, 300);
 
             workerTimersMock.flushInterval(299);
@@ -21,7 +19,7 @@ describe('workerTimersMock', function () {
             expect(func).to.have.not.been.called;
         });
 
-        it('should call the given function', function () {
+        it('should call the given function', () => {
             workerTimersMock.setInterval(func, 300);
 
             workerTimersMock.flushInterval(300);
@@ -29,7 +27,7 @@ describe('workerTimersMock', function () {
             expect(func).to.have.been.calledOnce;
         });
 
-        it('should call the given function twice', function () {
+        it('should call the given function twice', () => {
             workerTimersMock.setInterval(func, 300);
 
             workerTimersMock.flushInterval(600);

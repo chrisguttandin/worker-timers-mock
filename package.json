@@ -1,14 +1,29 @@
 {
   "author": "Christoph Guttandin",
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "plugins": [
+            "transform-es2015-modules-commonjs"
+          ]
+        }
+      ]
+    ]
+  },
   "bugs": {
     "url": "https://github.com/chrisguttandin/worker-timers-mock/issues"
   },
   "dependencies": {
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.11.5",
     "browserify": "^13.1.0",
     "sinon": "^1.17.3"
   },
   "description": "A mocked version of the worker-timers module.",
   "devDependencies": {
+    "babel-eslint": "^6.1.2",
+    "babelify": "^7.3.0",
     "chai": "^3.5.0",
     "eslint-config-holy-grail": "^6.0.0",
     "grunt": "^1.0.1",
