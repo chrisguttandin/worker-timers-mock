@@ -53,7 +53,7 @@
     "url": "https://github.com/chrisguttandin/worker-timers-mock.git"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt lint && grunt test"
   },
   "version": "1.0.1"
 }
