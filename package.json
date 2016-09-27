@@ -22,7 +22,7 @@
   },
   "description": "A mocked version of the worker-timers module.",
   "devDependencies": {
-    "babel-eslint": "^6.1.2",
+    "babel-eslint": "^7.0.0",
     "babelify": "^7.3.0",
     "chai": "^3.5.0",
     "eslint-config-holy-grail": "^9.0.0",
