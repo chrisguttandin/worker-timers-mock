@@ -18,7 +18,7 @@
   "dependencies": {
     "babel-plugin-transform-es2015-modules-commonjs": "^6.11.5",
     "browserify": "^13.1.0",
-    "sinon": "^1.17.3"
+    "sinon": "^2.0.0-pre.4"
   },
   "description": "A mocked version of the worker-timers module.",
   "devDependencies": {
