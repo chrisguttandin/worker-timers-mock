@@ -2,71 +2,79 @@
 
 module.exports = function (config) {
 
-    /* eslint-disable indent */
-    var configuration = {
+    config.set({
 
-            files: [
-                '../../test/unit/**/*.js'
-            ],
+        files: [
+            '../../test/unit/**/*.js'
+        ],
 
-            frameworks: [
-                'browserify',
-                'mocha',
-                'sinon-chai'
-            ],
+        frameworks: [
+            'browserify',
+            'mocha',
+            'sinon-chai'
+        ],
 
-            preprocessors: {
-                '../../test/unit/**/*.js': 'browserify'
-            }
+        preprocessors: {
+            '../../test/unit/**/*.js': 'browserify'
+        }
 
-        };
-    /* eslint-enable indent */
+    });
 
     if (process.env.TRAVIS) {
-        configuration.browsers = [
-            // 'ChromeCanarySauceLabs',
-            'ChromeSauceLabs',
-            // 'FirefoxDeveloperSauceLabs',
-            'FirefoxSauceLabs'
-        ];
 
-        configuration.captureTimeout = 120000;
+        config.set({
 
-        configuration.customLaunchers = {
-            ChromeCanarySauceLabs: {
-                base: 'SauceLabs',
-                browserName: 'chrome',
-                platform: 'OS X 10.11',
-                version: 'dev'
-            },
-            ChromeSauceLabs: {
-                base: 'SauceLabs',
-                browserName: 'chrome',
-                platform: 'OS X 10.11'
-            },
-            FirefoxDeveloperSauceLabs: {
-                base: 'SauceLabs',
-                browserName: 'firefox',
-                platform: 'OS X 10.11',
-                version: 'dev'
-            },
-            FirefoxSauceLabs: {
-                base: 'SauceLabs',
-                browserName: 'firefox',
-                platform: 'OS X 10.11'
-            }
-        };
+            browsers: [
+                // 'ChromeCanarySauceLabs',
+                'ChromeSauceLabs',
+                // 'FirefoxDeveloperSauceLabs',
+                'FirefoxSauceLabs'
+            ],
 
-        configuration.tunnelIdentifier = process.env.TRAVIS_JOB_NUMBER;
+            captureTimeout: 120000,
+
+            customLaunchers: {
+                ChromeCanarySauceLabs: {
+                    base: 'SauceLabs',
+                    browserName: 'chrome',
+                    platform: 'OS X 10.11',
+                    version: 'dev'
+                },
+                ChromeSauceLabs: {
+                    base: 'SauceLabs',
+                    browserName: 'chrome',
+                    platform: 'OS X 10.11'
+                },
+                FirefoxDeveloperSauceLabs: {
+                    base: 'SauceLabs',
+                    browserName: 'firefox',
+                    platform: 'OS X 10.11',
+                    version: 'dev'
+                },
+                FirefoxSauceLabs: {
+                    base: 'SauceLabs',
+                    browserName: 'firefox',
+                    platform: 'OS X 10.11'
+                }
+            },
+
+            tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER
+
+        });
+
     } else {
-        configuration.browsers = [
-            'Chrome',
-            'ChromeCanary',
-            'Firefox',
-            'FirefoxDeveloper'
-        ];
-    }
 
-    config.set(configuration);
+        config.set({
+
+            browsers: [
+                'Chrome',
+                'ChromeCanary',
+                'Firefox',
+                'FirefoxDeveloper'
+            ]
+
+        });
+
+    }
 
 };

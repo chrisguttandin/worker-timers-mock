@@ -1,24 +1,19 @@
 import { stub } from 'sinon';
 
-var currentIntervalTime,
-    lastIntervalId,
-    scheduledIntervalFunctions,
-    workerTimers;
+let currentIntervalTime = 0;
+let lastIntervalId = -1;
 
-currentIntervalTime = 0;
-lastIntervalId = -1;
-scheduledIntervalFunctions = [];
+const scheduledIntervalFunctions = [];
 
-workerTimers = {
+const workerTimers = {
     clearInterval () {},
     clearTimeout () {},
     flushInterval (elapsedTime) {
-        var scheduledIntervalFunction;
-
         currentIntervalTime += elapsedTime;
 
         while (scheduledIntervalFunctions.length && scheduledIntervalFunctions[0].nextTime <= currentIntervalTime) {
-            scheduledIntervalFunction = scheduledIntervalFunctions[0];
+            const scheduledIntervalFunction = scheduledIntervalFunctions[0];
+
             scheduledIntervalFunction.func();
             scheduledIntervalFunction.nextTime += scheduledIntervalFunction.delay;
 
@@ -30,10 +25,8 @@ workerTimers = {
 };
 
 stub(workerTimers, 'clearInterval', (id) => {
-    var found;
-
     scheduledIntervalFunctions.some((scheduledIntervalFunction) => {
-        found = (scheduledIntervalFunction.id === id);
+        const found = (scheduledIntervalFunction.id === id);
 
         if (found) {
             scheduledIntervalFunctions.splice(scheduledIntervalFunctions.indexOf(scheduledIntervalFunction), 1);
@@ -48,10 +41,9 @@ stub(workerTimers, 'clearTimeout', () => {
 });
 
 stub(workerTimers, 'setInterval', (func, delay) => {
-    var id;
-
     lastIntervalId += 1;
-    id = lastIntervalId;
+
+    const id = lastIntervalId;
 
     scheduledIntervalFunctions.push({
         delay,

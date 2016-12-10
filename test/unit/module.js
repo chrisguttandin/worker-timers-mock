@@ -5,7 +5,7 @@ describe('workerTimersMock', () => {
 
     describe('flush()', () => {
 
-        var func;
+        let func;
 
         beforeEach(() => {
             func = spy();
