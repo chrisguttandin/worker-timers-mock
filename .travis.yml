@@ -4,5 +4,5 @@ env:
     - secure: "pHIZTat6TQAQ4gxQufqajn8MJD8eBMSDuG2gdyILtfDfVn+ZxYPBjXppC+w/eT3o1PW75kZgC/d+B89Yxgg40dRRGcMb3wLQ1uChor/bposHt2AaJx+oPMoltGdFVSkWYSWBpCqAcZQpQbfDvCUbqRpRkivrlQQ75Ei+SkJVeKWTpxYaqGSuVS4ubrCqFLzACaIAwDUcJIshBlpJQwaTVHRLiFL5PFFY/2NyqTEHdlRRxkAUzEPue8gDYnOsfAZ4tZiZSfMiHm6vH9p16U9nc6hVxy+rsQimjaWr+by6Dc0IuvVwXLVJLsvm+843oDMnVjgN12D2d/UzQPmGkwtUq2Fgcf7l4ei8ABGtEkT20pGMv0cnfPtWXrAZE+vr76O1k0Z3xchiyUvWIYZp52Zj0X+PekSJKl+/ToTBLuBtgupkVN9kXFW3isV6Xzrknw3MQUwHUaS17Nu5e37XNYQlDPMaQ8ONN+JrceR7LPu3l9vzDukBgYQ2BQSpwnzHzJmP+NzTVzKq/NIYyfsYuZRQ+yMmaB66OV1EV+/cDAyW4wWE93YsEF3IOHBH382lNB5+g4WY1YlZs8ksFQ+1L6BFG+Zx3CBbq75t2lbbzCyzAPH1CoGEyHRi+BqapVyvGcXN7l0gOb0tt+G9itdTpe04H+YTYC/UgezrlvCm5lekz+M="
 language: node_js
 node_js:
-    - "stable"
+    - "node"
 sudo: false
