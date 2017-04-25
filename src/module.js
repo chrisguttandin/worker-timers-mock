@@ -24,7 +24,7 @@ const workerTimers = {
     setTimeout () {}
 };
 
-stub(workerTimers, 'clearInterval', (id) => {
+stub(workerTimers, 'clearInterval').callsFake((id) => {
     scheduledIntervalFunctions.some((scheduledIntervalFunction) => {
         const found = (scheduledIntervalFunction.id === id);
 
@@ -36,11 +36,11 @@ stub(workerTimers, 'clearInterval', (id) => {
     });
 });
 
-stub(workerTimers, 'clearTimeout', () => {
+stub(workerTimers, 'clearTimeout').callsFake(() => {
 
 });
 
-stub(workerTimers, 'setInterval', (func, delay) => {
+stub(workerTimers, 'setInterval').callsFake((func, delay) => {
     lastIntervalId += 1;
 
     const id = lastIntervalId;
@@ -57,7 +57,7 @@ stub(workerTimers, 'setInterval', (func, delay) => {
     return id;
 });
 
-stub(workerTimers, 'setTimeout', () => {
+stub(workerTimers, 'setTimeout').callsFake(() => {
 
 });
 
