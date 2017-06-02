@@ -4,6 +4,8 @@ module.exports = function (config) {
 
         basePath: '../../',
 
+        concurrency: 2,
+
         files: [
             'test/unit/**/*.js'
         ],
