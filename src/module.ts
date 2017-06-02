@@ -1,14 +1,14 @@
-import { stub } from 'sinon';
+import { SinonStub, stub } from 'sinon';
 
 let currentIntervalTime = 0;
 let lastIntervalId = -1;
 
-const scheduledIntervalFunctions = [];
+const scheduledIntervalFunctions: { delay: number, func: Function, id: number, nextTime: number }[] = [];
 
 const workerTimers = {
-    clearInterval () {},
-    clearTimeout () {},
-    flushInterval (elapsedTime) {
+    clearInterval () {}, // tslint:disable-line:no-empty
+    clearTimeout () {}, // tslint:disable-line:no-empty
+    flushInterval (elapsedTime: number) {
         currentIntervalTime += elapsedTime;
 
         while (scheduledIntervalFunctions.length && scheduledIntervalFunctions[0].nextTime <= currentIntervalTime) {
@@ -20,8 +20,16 @@ const workerTimers = {
             scheduledIntervalFunctions.sort((a, b) => a.nextTime - b.nextTime);
         }
     },
-    setInterval () {},
-    setTimeout () {}
+    resetInterval () {
+        currentIntervalTime = 0;
+        lastIntervalId = -1;
+        scheduledIntervalFunctions.length = 0;
+
+        (<SinonStub> workerTimers.clearInterval).reset();
+        (<SinonStub> workerTimers.setInterval).reset();
+    },
+    setInterval () {}, // tslint:disable-line:no-empty
+    setTimeout () {} // tslint:disable-line:no-empty
 };
 
 stub(workerTimers, 'clearInterval').callsFake((id) => {
@@ -36,7 +44,7 @@ stub(workerTimers, 'clearInterval').callsFake((id) => {
     });
 });
 
-stub(workerTimers, 'clearTimeout').callsFake(() => {
+stub(workerTimers, 'clearTimeout').callsFake(() => { // tslint:disable-line:no-empty
 
 });
 
@@ -57,17 +65,8 @@ stub(workerTimers, 'setInterval').callsFake((func, delay) => {
     return id;
 });
 
-stub(workerTimers, 'setTimeout').callsFake(() => {
+stub(workerTimers, 'setTimeout').callsFake(() => { // tslint:disable-line:no-empty
 
 });
-
-workerTimers.resetInterval = () => {
-    currentIntervalTime = 0;
-    lastIntervalId = -1;
-    scheduledIntervalFunctions.length = 0;
-
-    workerTimers.clearInterval.reset();
-    workerTimers.setInterval.reset();
-};
 
 export default workerTimers;

@@ -2,18 +2,42 @@ module.exports = function (config) {
 
     config.set({
 
+        basePath: '../../',
+
         files: [
-            '../../test/unit/**/*.js'
+            'test/unit/**/*.js'
         ],
 
         frameworks: [
-            'browserify',
             'mocha',
             'sinon-chai'
         ],
 
+        mime: {
+            'text/x-typescript': [ 'ts', 'tsx' ]
+        },
+
         preprocessors: {
-            '../../test/unit/**/*.js': 'browserify'
+            'src/**/*.ts': 'webpack',
+            'test/unit/**/*.js': 'webpack'
+        },
+
+        webpack: {
+            module: {
+                loaders: [
+                    {
+                        loader: 'ts-loader',
+                        test: /\.ts?$/
+                    }
+                ]
+            },
+            resolve: {
+                extensions: [ '.js', '.ts' ]
+            }
+        },
+
+        webpackMiddleware: {
+            noInfo: true
         }
 
     });
