@@ -33,7 +33,7 @@ export const setTimeout = stub().callsFake(() => { // tslint:disable-line:no-emp
 
 });
 
-export const resetInterval = () => {
+export const reset = () => {
     deLorean.reset();
     idToTicketMap.clear();
 
