@@ -2,15 +2,21 @@ import { stub } from 'sinon';
 import { DeLorean, IVehicle } from 'vehicles';
 
 const deLorean = new DeLorean();
-const idToTicketMap: Map<number, number> = new Map();
+const intervalIdToTicketMap: Map<number, number> = new Map();
 
 export const clearInterval = stub().callsFake((id) => {
-    deLorean.cancel(id);
-    idToTicketMap.delete(id);
+    const ticket = intervalIdToTicketMap.get(id);
+
+    if (ticket !== undefined) {
+        deLorean.cancel(ticket);
+    }
+
+    intervalIdToTicketMap.delete(id);
 });
 
-export const clearTimeout = stub().callsFake(() => { // tslint:disable-line:no-empty
-
+export const clearTimeout = stub().callsFake((id) => { // tslint:disable-line:no-empty
+    deLorean.cancel(id);
+    intervalIdToTicketMap.delete(id);
 });
 
 export const getVehicle = (): IVehicle => {
@@ -19,24 +25,26 @@ export const getVehicle = (): IVehicle => {
 
 export const setInterval = stub().callsFake((func, delay) => {
     const id = deLorean.schedule(deLorean.position + delay, function funcWithScheduler() {
-        idToTicketMap.set(id, deLorean.schedule(deLorean.position + delay, funcWithScheduler));
+        intervalIdToTicketMap.set(id, deLorean.schedule(deLorean.position + delay, funcWithScheduler));
 
         func();
     });
 
-    idToTicketMap.set(id, id);
+    intervalIdToTicketMap.set(id, id);
 
     return id;
 });
 
-export const setTimeout = stub().callsFake(() => { // tslint:disable-line:no-empty
-
+export const setTimeout = stub().callsFake((func, delay) => { // tslint:disable-line:no-empty
+    return deLorean.schedule(deLorean.position + delay, func);
 });
 
 export const reset = () => {
     deLorean.reset();
-    idToTicketMap.clear();
+    intervalIdToTicketMap.clear();
 
     clearInterval.reset();
+    clearTimeout.reset();
     setInterval.reset();
+    setTimeout.reset();
 };
