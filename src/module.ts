@@ -1,5 +1,5 @@
 import { stub } from 'sinon';
-import { DeLorean } from 'vehicles';
+import { DeLorean, IVehicle } from 'vehicles';
 
 const deLorean = new DeLorean();
 const idToTicketMap: Map<number, number> = new Map();
@@ -13,8 +13,8 @@ export const clearTimeout = stub().callsFake(() => { // tslint:disable-line:no-e
 
 });
 
-export const flushInterval = (elapsedTime: number) => {
-    deLorean.travel(elapsedTime);
+export const getVehicle = (): IVehicle => {
+    return deLorean;
 };
 
 export const setInterval = stub().callsFake((func, delay) => {
