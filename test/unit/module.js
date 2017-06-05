@@ -1,40 +1,122 @@
 import * as workerTimersMock from '../../src/module';
-import { spy } from 'sinon';
 
 describe('workerTimersMock', () => {
 
-    describe('flush()', () => {
+    let vehicle;
 
-        let func;
-        let vehicle;
+    beforeEach(() => {
+        vehicle = workerTimersMock.getVehicle();
+    });
 
-        beforeEach(() => {
-            func = spy();
-            vehicle = workerTimersMock.getVehicle();
+    describe('clearInterval()', () => {
+
+        it('should not call the function after clearing the interval', () => {
+            const id = workerTimersMock.setInterval(() => {
+                throw new Error('this should never be called');
+            }, 100);
+
+            workerTimersMock.clearInterval(id);
+
+            // Travel 200ms to be sure the function never gets called.
+            vehicle.travel(200);
         });
 
-        it('should not call the given function', () => {
-            workerTimersMock.setInterval(func, 300);
+        it('should not call the function anymore after clearing the interval after the first callback', () => {
+            let id = workerTimersMock.setInterval(() => {
+                if (id === null) {
+                    throw new Error('this should never be called');
+                }
 
-            vehicle.travel(299);
+                workerTimersMock.clearInterval(id);
+                id = null;
+            }, 50);
 
-            expect(func).to.have.not.been.called;
+            // Travel 200ms to be sure the function gets not called anymore.
+            vehicle.travel(200);
         });
 
-        it('should call the given function', () => {
-            workerTimersMock.setInterval(func, 300);
+    });
 
-            vehicle.travel(300);
+    describe('clearTimeout()', () => {
 
-            expect(func).to.have.been.calledOnce;
+        it('should not call the function after clearing the timeout', () => {
+            const id = workerTimersMock.setTimeout(() => {
+                throw new Error('this should never be called');
+            }, 100);
+
+            workerTimersMock.clearTimeout(id);
+
+            // Travel 200ms to be sure the function never gets called.
+            vehicle.travel(200);
         });
 
-        it('should call the given function twice', () => {
-            workerTimersMock.setInterval(func, 300);
+    });
 
-            vehicle.travel(600);
+    describe('setInterval()', () => {
 
-            expect(func).to.have.been.calledTwice;
+        let id;
+
+        afterEach(() => {
+            workerTimersMock.clearInterval(id);
+        });
+
+        it('should return a numeric id', () => {
+            id = workerTimersMock.setInterval(() => {}, 0);
+
+            expect(id).to.be.a('number');
+        });
+
+        it('should constantly call a function with the given delay', () => {
+            let before = vehicle.position;
+            let calls = 0;
+
+            function func () {
+                const now = vehicle.position;
+                const elapsed = now - before;
+
+                expect(elapsed).to.equal(100);
+
+                before = now;
+                calls += 1;
+            }
+
+            id = workerTimersMock.setInterval(func, 100);
+
+            vehicle.travel(500);
+
+            expect(calls).to.equal(5);
+        });
+
+    });
+
+    describe('setTimeout()', () => {
+
+        let id;
+
+        afterEach(() => {
+            workerTimersMock.clearTimeout(id);
+        });
+
+        it('should return a numeric id', () => {
+            id = workerTimersMock.setTimeout(() => {}, 0);
+
+            expect(id).to.be.a('number');
+        });
+
+        it('should postpone a function for the given delay', (done) => {
+            const before = vehicle.position;
+
+            function func () {
+                const elapsed = vehicle.position - before;
+
+                expect(elapsed).to.equal(100);
+
+                done();
+            }
+
+            id = workerTimersMock.setTimeout(func, 100);
+
+            vehicle.travel(100);
         });
 
     });
