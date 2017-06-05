@@ -1,5 +1,5 @@
+import * as workerTimersMock from '../../src/module';
 import { spy } from 'sinon';
-import workerTimersMock from '../../src/module';
 
 describe('workerTimersMock', () => {
 
