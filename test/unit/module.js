@@ -18,7 +18,7 @@ describe('workerTimersMock', () => {
             workerTimersMock.clearInterval(id);
 
             // Travel 200ms to be sure the function never gets called.
-            vehicle.travel(200);
+            return vehicle.travel(200);
         });
 
         it('should not call the function anymore after clearing the interval after the first callback', () => {
@@ -32,7 +32,7 @@ describe('workerTimersMock', () => {
             }, 50);
 
             // Travel 200ms to be sure the function gets not called anymore.
-            vehicle.travel(200);
+            return vehicle.travel(200);
         });
 
     });
@@ -47,7 +47,7 @@ describe('workerTimersMock', () => {
             workerTimersMock.clearTimeout(id);
 
             // Travel 200ms to be sure the function never gets called.
-            vehicle.travel(200);
+            return vehicle.travel(200);
         });
 
     });
@@ -82,9 +82,9 @@ describe('workerTimersMock', () => {
 
             id = workerTimersMock.setInterval(func, 100);
 
-            vehicle.travel(500);
-
-            expect(calls).to.equal(5);
+            return vehicle
+                .travel(500)
+                .then(() => expect(calls).to.equal(5));
         });
 
     });
@@ -103,20 +103,24 @@ describe('workerTimersMock', () => {
             expect(id).to.be.a('number');
         });
 
-        it('should postpone a function for the given delay', (done) => {
+        it('should postpone a function for the given delay', () => {
             const before = vehicle.position;
+
+            let calls = 0;
 
             function func () {
                 const elapsed = vehicle.position - before;
 
                 expect(elapsed).to.equal(100);
 
-                done();
+                calls += 1;
             }
 
             id = workerTimersMock.setTimeout(func, 100);
 
-            vehicle.travel(100);
+            return vehicle
+                .travel(500)
+                .then(() => expect(calls).to.equal(1));
         });
 
     });
