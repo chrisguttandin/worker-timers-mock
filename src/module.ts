@@ -43,8 +43,8 @@ export const reset = () => {
     deLorean.reset();
     intervalIdToTicketMap.clear();
 
-    clearInterval.reset();
-    clearTimeout.reset();
-    setInterval.reset();
-    setTimeout.reset();
+    clearInterval.resetHistory();
+    clearTimeout.resetHistory();
+    setInterval.resetHistory();
+    setTimeout.resetHistory();
 };
