@@ -5,7 +5,7 @@
     "url": "https://github.com/chrisguttandin/worker-timers-mock/issues"
   },
   "dependencies": {
-    "sinon": "^2.3.6"
+    "sinon": "^2.3.7"
   },
   "description": "A mocked version of the worker-timers module.",
   "devDependencies": {
