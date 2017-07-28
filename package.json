@@ -43,7 +43,7 @@
     "tslint-config-holy-grail": "^9.0.12",
     "typescript": "^2.4.2",
     "vehicles": "^2.2.2",
-    "webpack": "^3.3.0"
+    "webpack": "^3.4.1"
   },
   "engines": {
     "node": ">=6.10.3"
