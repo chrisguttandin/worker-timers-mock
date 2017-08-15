@@ -24,7 +24,7 @@ export const getVehicle = (): IVehicle => {
 };
 
 export const setInterval = stub().callsFake((func, delay) => {
-    const id = deLorean.schedule(deLorean.position + delay, function funcWithScheduler() {
+    const id = deLorean.schedule(deLorean.position + delay, function funcWithScheduler () {
         intervalIdToTicketMap.set(id, deLorean.schedule(deLorean.position + delay, funcWithScheduler));
 
         func();
