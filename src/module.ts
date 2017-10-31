@@ -14,7 +14,7 @@ export const clearInterval: SinonStub = stub().callsFake((id) => {
     intervalIdToTicketMap.delete(id);
 });
 
-export const clearTimeout: SinonStub = stub().callsFake((id) => { // tslint:disable-line:no-empty
+export const clearTimeout: SinonStub = stub().callsFake((id) => {
     deLorean.cancel(id);
     intervalIdToTicketMap.delete(id);
 });
@@ -35,7 +35,7 @@ export const setInterval: SinonStub = stub().callsFake((func, delay) => {
     return id;
 });
 
-export const setTimeout: SinonStub = stub().callsFake((func, delay) => { // tslint:disable-line:no-empty
+export const setTimeout: SinonStub = stub().callsFake((func, delay) => {
     return deLorean.schedule(deLorean.position + delay, func);
 });
 
