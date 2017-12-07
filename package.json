@@ -49,7 +49,7 @@
     "tslint": "^5.8.0",
     "tslint-config-holy-grail": "^18.0.8",
     "typescript": "^2.6.2",
-    "vehicles": "^2.2.15",
+    "vehicles": "^2.2.16",
     "webpack": "^3.10.0"
   },
   "engines": {
