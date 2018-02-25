@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
-    "sinon": "^4.4.1",
+    "sinon": "^4.4.2",
     "tslib": "^1.9.0",
     "vehicles": "^2.2.18"
   },
@@ -77,5 +77,5 @@
     "test": "grunt lint && grunt test"
   },
   "types": "build/es2015/module.d.ts",
-  "version": "4.0.37"
+  "version": "4.0.38"
 }
