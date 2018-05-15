@@ -13,7 +13,7 @@
     "babel-runtime": "^6.26.0",
     "sinon": "^5.0.7",
     "tslib": "^1.9.1",
-    "vehicles": "^3.0.0"
+    "vehicles": "^3.0.1"
   },
   "description": "A mocked version of the worker-timers module.",
   "devDependencies": {
