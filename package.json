@@ -12,7 +12,7 @@
   "dependencies": {
     "sinon": "^6.1.5",
     "tslib": "^1.9.3",
-    "vehicles": "^3.0.9"
+    "vehicles": "^3.0.10"
   },
   "description": "A mocked version of the worker-timers module.",
   "devDependencies": {
