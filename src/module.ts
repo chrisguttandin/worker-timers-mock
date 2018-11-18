@@ -27,7 +27,7 @@ export const getVehicle = (): IVehicle => {
 
 export const setInterval: SinonStub = stub()
     .callsFake((func, delay) => {
-        const id = deLorean.schedule(deLorean.position + delay, function funcWithScheduler () {
+        const id = deLorean.schedule(deLorean.position + delay, function funcWithScheduler (): void {
             intervalIdToTicketMap.set(id, deLorean.schedule(deLorean.position + delay, funcWithScheduler));
 
             func();
