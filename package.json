@@ -13,7 +13,8 @@
     "@babel/runtime": "^7.4.5",
     "sinon": "^7.3.2",
     "tslib": "^1.10.0",
-    "vehicles": "^5.0.1"
+    "vehicles": "^5.0.1",
+    "snyk": "^1.192.0"
   },
   "description": "A mocked version of the worker-timers module.",
   "devDependencies": {
@@ -84,8 +85,11 @@
   },
   "scripts": {
     "prepublishOnly": "grunt build",
-    "test": "grunt lint && grunt test"
+    "test": "grunt lint && grunt test",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "types": "build/es2018/module.d.ts",
-  "version": "7.0.2"
+  "version": "7.0.2",
+  "snyk": true
 }
