@@ -11,8 +11,8 @@ module.exports = {
         'sh:lint-test'
     ],
     test: [
-        'karma:test',
         'build',
-        'sh:test-unit'
+        'sh:test-unit-browser',
+        'sh:test-unit-node'
     ]
 };
