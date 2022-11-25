@@ -11,7 +11,7 @@
     },
     "dependencies": {
         "@babel/runtime": "^7.20.1",
-        "sinon": "^14.0.1",
+        "sinon": "^14.0.2",
         "tslib": "^2.4.1",
         "vehicles": "^7.0.24"
     },
