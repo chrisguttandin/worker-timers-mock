@@ -10,7 +10,7 @@
         }
     },
     "dependencies": {
-        "@babel/runtime": "^7.23.1",
+        "@babel/runtime": "^7.23.2",
         "sinon": "^16.0.0",
         "tslib": "^2.6.2",
         "vehicles": "^9.0.11"
