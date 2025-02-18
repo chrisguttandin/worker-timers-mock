@@ -2,7 +2,7 @@ import { SinonStub, stub } from 'sinon';
 import { DeLorean, IVehicle } from 'vehicles';
 
 const deLorean = new DeLorean();
-const intervalIdToTicketMap: Map<number, number> = new Map();
+const intervalIdToTicketMap = new Map<number, number>();
 
 export const clearInterval = stub().callsFake((...args) => {
     /*
