@@ -1,5 +1,5 @@
-import { SinonStub, stub } from 'sinon';
-import { DeLorean, IVehicle } from 'vehicles';
+import { stub, type SinonStub } from 'sinon';
+import { DeLorean, type IVehicle } from 'vehicles';
 
 const deLorean = new DeLorean();
 const intervalIdToTicketMap = new Map<number, number>();
