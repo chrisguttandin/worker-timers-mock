@@ -9,7 +9,7 @@ export const clearInterval = stub().callsFake((...args) => {
      * @todo The current version of @types/sinon (v5.0.6) defines this function as one without parameters. Therefore this clunky
      * destructuring is needed to keep TypeScript happy.
      */
-    const [id] = <[number]>(<any>args);
+    const [id] = args as [number];
     const ticket = intervalIdToTicketMap.get(id);
 
     if (ticket !== undefined) {
@@ -24,7 +24,7 @@ export const clearTimeout: SinonStub = stub().callsFake((...args) => {
      * @todo The current version of @types/sinon (v5.0.6) defines this function as one without parameters. Therefore this clunky
      * destructuring is needed to keep TypeScript happy.
      */
-    const [id] = <[number]>(<any>args);
+    const [id] = args as [number];
 
     deLorean.cancel(id);
     intervalIdToTicketMap.delete(id);
@@ -39,7 +39,7 @@ export const setInterval: SinonStub = stub().callsFake((...args) => {
      * @todo The current version of @types/sinon (v5.0.6) defines this function as one without parameters. Therefore this clunky
      * destructuring is needed to keep TypeScript happy.
      */
-    const [func, delay] = <[Function, number]>(<any>args);
+    const [func, delay] = args as [Function, number];
     const id = deLorean.schedule(deLorean.position + delay, function funcWithScheduler(): void {
         intervalIdToTicketMap.set(id, deLorean.schedule(deLorean.position + delay, funcWithScheduler));
 
@@ -56,7 +56,7 @@ export const setTimeout: SinonStub = stub().callsFake((...args) => {
      * @todo The current version of @types/sinon (v5.0.6) defines this function as one without parameters. Therefore this clunky
      * destructuring is needed to keep TypeScript happy.
      */
-    const [func, delay] = <[Function, number]>(<any>args);
+    const [func, delay] = args as [Function, number];
 
     return deLorean.schedule(deLorean.position + delay, func);
 });
