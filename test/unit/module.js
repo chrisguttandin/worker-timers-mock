@@ -1,4 +1,5 @@
 import * as workerTimersMock from '../../src/module';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 describe('workerTimersMock', () => {
     let vehicle;
