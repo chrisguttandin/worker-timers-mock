@@ -1,15 +1,10 @@
-import { stub, type SinonStub } from 'sinon';
 import { DeLorean, type IVehicle } from 'vehicles';
+import { createMockableFunction } from './mocking-implementation';
 
 const deLorean = new DeLorean();
 const intervalIdToTicketMap = new Map<number, number>();
 
-export const clearInterval = stub().callsFake((...args) => {
-    /*
-     * @todo The current version of @types/sinon (v5.0.6) defines this function as one without parameters. Therefore this clunky
-     * destructuring is needed to keep TypeScript happy.
-     */
-    const [id] = args as [number];
+export const clearInterval = createMockableFunction((id: number) => {
     const ticket = intervalIdToTicketMap.get(id);
 
     if (ticket !== undefined) {
@@ -19,13 +14,7 @@ export const clearInterval = stub().callsFake((...args) => {
     intervalIdToTicketMap.delete(id);
 });
 
-export const clearTimeout: SinonStub = stub().callsFake((...args) => {
-    /*
-     * @todo The current version of @types/sinon (v5.0.6) defines this function as one without parameters. Therefore this clunky
-     * destructuring is needed to keep TypeScript happy.
-     */
-    const [id] = args as [number];
-
+export const clearTimeout = createMockableFunction((id: number) => {
     deLorean.cancel(id);
     intervalIdToTicketMap.delete(id);
 });
@@ -34,12 +23,7 @@ export const getVehicle = (): IVehicle => {
     return deLorean;
 };
 
-export const setInterval: SinonStub = stub().callsFake((...args) => {
-    /*
-     * @todo The current version of @types/sinon (v5.0.6) defines this function as one without parameters. Therefore this clunky
-     * destructuring is needed to keep TypeScript happy.
-     */
-    const [func, delay] = args as [Function, number];
+export const setInterval = createMockableFunction((func: Function, delay: number) => {
     const id = deLorean.schedule(deLorean.position + delay, function funcWithScheduler(): void {
         intervalIdToTicketMap.set(id, deLorean.schedule(deLorean.position + delay, funcWithScheduler));
 
@@ -51,22 +35,11 @@ export const setInterval: SinonStub = stub().callsFake((...args) => {
     return id;
 });
 
-export const setTimeout: SinonStub = stub().callsFake((...args) => {
-    /*
-     * @todo The current version of @types/sinon (v5.0.6) defines this function as one without parameters. Therefore this clunky
-     * destructuring is needed to keep TypeScript happy.
-     */
-    const [func, delay] = args as [Function, number];
-
+export const setTimeout = createMockableFunction((func: Function, delay: number) => {
     return deLorean.schedule(deLorean.position + delay, func);
 });
 
 export const reset = () => {
     deLorean.reset();
     intervalIdToTicketMap.clear();
-
-    clearInterval.resetHistory();
-    clearTimeout.resetHistory();
-    setInterval.resetHistory();
-    setTimeout.resetHistory();
 };
